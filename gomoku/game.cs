@@ -41,6 +41,18 @@ namespace gomoku
             return m_board.CanBePlaced(x, y);
         }
 
+        public void CheckWeight(int x, int y)
+        {
+            for (int xDir = -2; xDir<=2;xDir++)
+            {
+                for (int yDir = -2;yDir<=2;yDir++)
+                {
+                    if (xDir == 0 && yDir == 0)
+                        continue;
+                }
+            }
+        }
+
         public void CheckWinner(int x, int y)
         {
             for (int xDir = -1; xDir <= 1; xDir++)
