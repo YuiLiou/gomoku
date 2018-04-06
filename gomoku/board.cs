@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace gomoku
 {
@@ -33,7 +34,7 @@ namespace gomoku
                 return false;
 
             return true;
-        }
+        }       
 
         // 得到棋子顏色 ------------------------------------------------------- 
         public PieceType GetPieceType(int x, int y)
@@ -69,7 +70,7 @@ namespace gomoku
             return pieces[nodeID.X, nodeID.Y];
         }
 
-        private Point convertToFormPosition(Point nodeID)
+        public Point convertToFormPosition(Point nodeID)
         {
             Point formPosition = new Point();
             formPosition.X = nodeID.X * NODE_DISTANCE + OFFSET;

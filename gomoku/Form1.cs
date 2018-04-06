@@ -17,7 +17,7 @@ namespace gomoku
         public Form1()
         {            
             InitializeComponent();
-        }      
+        }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -25,18 +25,45 @@ namespace gomoku
             if (piece != null)
             {
                 this.Controls.Add(piece);                
-                if (m_game.Winner != PieceType.NONE)
+                // 顯示Score ------------------------------------------------------
+                int [] ary = m_game.GetPieceScore();
+                label1.Text = ary[0].ToString();
+                label2.Text = ary[1].ToString();
+                label3.Text = ary[2].ToString();
+                label4.Text = ary[3].ToString();
+                label5.Text = ary[4].ToString();
+                label6.Text = ary[5].ToString();
+                label7.Text = ary[6].ToString();
+                label8.Text = ary[7].ToString();
+                label9.Text = m_game.GetPieceWeight().ToString();
+
+                if (m_game.Winner == PieceType.Black)
                 {
-                    if (m_game.Winner == PieceType.Black)
-                    {
-                        MessageBox.Show("Black Win!");
-                    }
-                    else if (m_game.Winner == PieceType.White)
-                    {
-                        MessageBox.Show("White Win!");
-                    }
-                }
-            }           
+                    MessageBox.Show("Black Win!");
+                }                 
+            }
+            Piece c_piece = m_game.ComputerRun();
+            if (c_piece != null)
+            {
+                this.Controls.Add(c_piece);
+                // 顯示Score ------------------------------------------------------
+                int[] ary = m_game.GetPieceScore();
+                label1.Text = ary[0].ToString();
+                label2.Text = ary[1].ToString();
+                label3.Text = ary[2].ToString();
+                label4.Text = ary[3].ToString();
+                label5.Text = ary[4].ToString();
+                label6.Text = ary[5].ToString();
+                label7.Text = ary[6].ToString();
+                label8.Text = ary[7].ToString();
+                label9.Text = m_game.GetPieceWeight().ToString();
+
+                // 判定勝負 -------------------------------------------------------                
+                if (m_game.Winner == PieceType.White)
+                {
+                    MessageBox.Show("White Win!");
+                }                    
+            }
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -50,6 +77,6 @@ namespace gomoku
             {
                 this.Cursor = Cursors.Default;
             }
-        }
+        }       
     }
 }
