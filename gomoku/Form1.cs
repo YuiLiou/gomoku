@@ -24,19 +24,8 @@ namespace gomoku
             Piece piece = m_game.PlaceAPiece(e.X, e.Y);
             if (piece != null)
             {
-                this.Controls.Add(piece);                
-                // 顯示Score ------------------------------------------------------
-                int [] ary = m_game.GetPieceScore();
-                label1.Text = ary[0].ToString();
-                label2.Text = ary[1].ToString();
-                label3.Text = ary[2].ToString();
-                label4.Text = ary[3].ToString();
-                label5.Text = ary[4].ToString();
-                label6.Text = ary[5].ToString();
-                label7.Text = ary[6].ToString();
-                label8.Text = ary[7].ToString();
-                label9.Text = m_game.GetPieceWeight().ToString();
-
+                this.Controls.Add(piece);
+                // 判定勝負 -------------------------------------------------------                
                 if (m_game.Winner == PieceType.Black)
                 {
                     MessageBox.Show("Black Win!");
@@ -46,18 +35,6 @@ namespace gomoku
             if (c_piece != null)
             {
                 this.Controls.Add(c_piece);
-                // 顯示Score ------------------------------------------------------
-                int[] ary = m_game.GetPieceScore();
-                label1.Text = ary[0].ToString();
-                label2.Text = ary[1].ToString();
-                label3.Text = ary[2].ToString();
-                label4.Text = ary[3].ToString();
-                label5.Text = ary[4].ToString();
-                label6.Text = ary[5].ToString();
-                label7.Text = ary[6].ToString();
-                label8.Text = ary[7].ToString();
-                label9.Text = m_game.GetPieceWeight().ToString();
-
                 // 判定勝負 -------------------------------------------------------                
                 if (m_game.Winner == PieceType.White)
                 {

@@ -15,24 +15,35 @@ namespace gomoku
         private static readonly int NODE_DISTANCE = 75;
         private static readonly int NODE_RADIUS = 10;
         private Piece[,] pieces = new Piece [9,9];
+        // 擺盤 -------------------------------------------------------------------------------
+        private PieceType[,] _piecePlace = new PieceType[9, 9];
+        public PieceType [,] PiecePlace { get { return _piecePlace; } }
 
         // 最後一手 ---------------------------------------------------------------------------
         private Point latestPiece = NOT_EXISTS_NODE;
         public Point LatestPiece { get { return latestPiece; } }
 
+        public board()
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j=0;j<9;j++)
+                {
+                    _piecePlace[i,j] = PieceType.NONE;
+                }
+            }
+        }
+
         public bool CanBePlaced(int x, int y)
         {
             // 找最鄰近的點 ---------------------------------------------------
             Point nodeID = FindTheClosestNode(x, y);
-
             // 找不到 ---------------------------------------------------------
             if (nodeID == NOT_EXISTS_NODE)
                 return false;
-
             // 已經有棋子 -----------------------------------------------------
             if (pieces[nodeID.X, nodeID.Y] != null)
                 return false;
-
             return true;
         }       
 
@@ -48,11 +59,9 @@ namespace gomoku
         {
             // 找最鄰近的點 ---------------------------------------------------
             Point nodeID = FindTheClosestNode(x, y);
-
             // 找不到 ---------------------------------------------------------
             if (nodeID == NOT_EXISTS_NODE)
                 return null;
-
             // 已經有棋子 -----------------------------------------------------
             if (pieces[nodeID.X, nodeID.Y] != null)
                 return null;
@@ -63,9 +72,15 @@ namespace gomoku
                 latestPiece = nodeID;
                 // 下子 ----------------------------------------------------------------------
                 if (type == PieceType.Black)
+                {
                     pieces[nodeID.X, nodeID.Y] = new BlackPiece(formNodeID.X, formNodeID.Y);
+                    _piecePlace[nodeID.X, nodeID.Y] = PieceType.Black;
+                }
                 else if (type == PieceType.White)
+                {
                     pieces[nodeID.X, nodeID.Y] = new WhitePiece(formNodeID.X, formNodeID.Y);
+                    _piecePlace[nodeID.X, nodeID.Y] = PieceType.White;
+                }
             }
             return pieces[nodeID.X, nodeID.Y];
         }
