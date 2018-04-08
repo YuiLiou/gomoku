@@ -109,6 +109,8 @@ namespace gomoku
                 }
                 weight += continuous * continuous;
             }
+            if (currentPlayer == HumanPlayer)
+                weight *= -1;
             return weight;
         }
 
@@ -155,7 +157,6 @@ namespace gomoku
                             tmp_value = minimax(i, j, ComputerPlayer, depth - 1, PiecePlace, false);
                             PiecePlace[i, j] = PieceType.NONE;
                             // 電腦下棋 ---------------------------------------------------------------------
-                            //MessageBox.Show(String.Format("white tmp[{0},{1}]:{2}",i.ToString(), j.ToString(), tmp_value.ToString()));
                             if (tmp_value > max_value)
                             {
                                 max_value = tmp_value;
@@ -180,8 +181,6 @@ namespace gomoku
                             PiecePlace[i, j] = HumanPlayer;
                             tmp_value = minimax(i, j, HumanPlayer, depth - 1, PiecePlace, true);
                             PiecePlace[i, j] = PieceType.NONE;
-                            //MessageBox.Show(String.Format("black tmp[{0},{1}]:{2}", i.ToString(), j.ToString(), tmp_value.ToString()));
-
                             // 人類下棋 ---------------------------------------------------------------------
                             if (tmp_value < min_value)
                             {

@@ -75,7 +75,7 @@ namespace gomoku
                     {
                         // 電腦下棋 ----------------------------------------------------------------------------------
                         m_board.PiecePlace[i, j] = ComputerPlayer;
-                        int tmp_weight = m_pieceScore.minimax(i, j, ComputerPlayer, 2, m_board.PiecePlace, false);
+                        int tmp_weight = m_pieceScore.minimax(i, j, ComputerPlayer, 1, m_board.PiecePlace, false);
                         m_board.PiecePlace[i, j] = PieceType.NONE;
                         // 電腦下棋 ----------------------------------------------------------------------------------
                         if (m_bestPiece.weight < tmp_weight)
@@ -83,7 +83,6 @@ namespace gomoku
                             m_bestPiece.x = i;
                             m_bestPiece.y = j;
                             m_bestPiece.weight = tmp_weight;
-                            //MessageBox.Show("weight:" + i + " " + j + " " + tmp_weight);
                         }
                     }
                 }
